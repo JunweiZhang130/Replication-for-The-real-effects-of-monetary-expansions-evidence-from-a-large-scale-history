@@ -50,10 +50,25 @@ head(simulated_data)
 library(ggplot2)
 
 # plot
+# Generate nominal GDP values
+simulated_data <- simulated_data %>%
+  mutate(nominal_gdp = rlnorm(n(), meanlog = 6.8, sdlog = 0.55)) %>%
+  group_by(Countries) %>%
+  mutate(nominal_gdp = nominal_gdp / (nominal_gdp[Years == 1700] / 100)) %>%
+  ungroup()
+
+# Create a list of colors for the countries
+colors <- c("#7F3C8D", "#11A579", "#3969AC", "#F2B701", "#E73F74", "#80BA5A")
+
+# Plot the data
 ggplot(simulated_data, aes(x = Years, y = nominal_gdp, color = Countries)) +
-  geom_line() +
+  geom_line(size = 0.8) +
+  scale_color_manual(values = colors) +
+  scale_y_continuous(limits = c(0, 300), expand = c(0, 0)) +
+
   labs(x = "Year", 
        y = "Nominal GDP", 
        title = "Nominal GDP for 6 Countries") +
   theme_minimal() +
   facet_wrap(~ Countries, ncol = 2)
+
