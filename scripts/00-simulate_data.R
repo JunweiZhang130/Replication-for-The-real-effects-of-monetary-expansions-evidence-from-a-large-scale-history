@@ -17,7 +17,7 @@ head(datadescriptive)
 liquidity <- read_dta("inputs/data/liquidity.dta")
 head(liquidity)
 
-#### Simulate data of Figure 4 ####
+#### Simulate data of Figure 4.0 ####
 set.seed(853)
 
 # create a data frame with all combinations of years and countries
