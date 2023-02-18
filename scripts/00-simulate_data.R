@@ -167,8 +167,8 @@ simulated_england_first_stage_variables <-
   sample_n(size = 2) |>
   ungroup() |>
   mutate(English_Mint = round(runif(n(), 
-                                    min = -8, 
-                                    max = -2.0), 
+                                    min = -5.3, 
+                                    max = -3.0), 
                               digits = 6)) %>%
   mutate(Precious_Metals = round(runif(n(), 
                                        min = -5.3, 
@@ -178,15 +178,22 @@ simulated_england_first_stage_variables <-
 head(simulated_england_first_stage_variables)
 
 # Plot the results
-ggplot(simulated_england_first_stage_variables, aes(x = Years)) +
-  geom_line(aes(y = English_Mint), color = "blue") +
-  scale_y_continuous(name = "English Mint Output", 
-                     limits = c(-5, -3)) +
-  geom_line(aes(y = Precious_Metals), 
-            color = "red", 
-            linetype = "dashed") +
-  scale_y_continuous(name = "Precious Metals", 
-                     sec.axis = sec_axis(~., name = "Precious Metals", 
-                                         breaks = seq(-8, -2, by = 1), 
-                                         labels = seq(-8, -2, by = 1))) +
-  labs(title = "Simulated England First-Stage Variables")
+# Set margin and plot first variable
+par(mar=c(5,5,2,5))
+plot(simulated_england_first_stage_variables$Years, 
+     simulated_england_first_stage_variables$Precious_Metals, 
+     xlab = "Year", ylab = "Precious Metals", type = "l", lwd = 2, 
+     ylim = c(-5, -3), col = "blue")
+par(new=TRUE)
+
+# Add second variable with new axis
+par(new=TRUE)
+plot(simulated_england_first_stage_variables$Years, simulated_england_first_stage_variables$English_Mint, 
+     xlab = "", ylab = "", type = "l", lwd = 2, ylim = c(-8, -2), col = "red", lty = "dashed", axes=FALSE)
+axis(4, ylim = c(-8, -2), col="red", col.axis="red", las=1)
+mtext(side=4, line=3, "English Mint Output", col="red")
+
+# Add axis labels and legend
+title(main = "Simulated England First-Stage Variables")
+legend("topleft", legend = c("Precious Metals", "English Mint Output"), 
+       col = c("blue", "red"), lty = c("solid", "dashed"), lwd = 2, cex = 0.8)
