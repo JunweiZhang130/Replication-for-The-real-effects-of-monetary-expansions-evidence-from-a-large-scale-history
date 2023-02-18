@@ -197,3 +197,39 @@ mtext(side=4, line=3, "English Mint Output", col="red")
 title(main = "Simulated England First-Stage Variables")
 legend("topleft", legend = c("Precious Metals", "English Mint Output"), 
        col = c("blue", "red"), lty = c("solid", "dashed"), lwd = 2, cex = 0.8)
+
+#### Simulate data of Figure 12 ####
+datadescriptive <- read_dta("inputs/data/datadescriptive.dta")
+head(datadescriptive)
+
+liquidity <- read_dta("inputs/data/liquidity.dta")
+head(liquidity)
+
+set.seed(853)
+years <- 1531:1790
+
+# define England mint output in millions
+englandmintmillions <- round(runif(n = length(years), min = -8, max = -2), digits = 1)
+
+simulated_englandmintoutput <- 
+  expand_grid(Years = years)
+
+# group by year and sample one country per group
+simulated_englandmintoutput <- 
+  simulated_englandmintoutput |>
+  group_by(Years) |>
+  sample_n(size = 1) |>
+  ungroup() |>
+  mutate(englandmintoutput = round(runif(n(), 
+                                   min = 0.00000000, 
+                                   max = 5.0066652), 
+                             digits = 7))
+
+head(simulated_englandmintoutput)
+
+#create plot#
+library(ggplot2)
+
+ggplot(simulated_englandmintoutput, aes(x = Years, y = englandmintoutput)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Year", y = "England Mint Output (in millions)", title = "Simulated England Mint Output from 1531 to 1790")
