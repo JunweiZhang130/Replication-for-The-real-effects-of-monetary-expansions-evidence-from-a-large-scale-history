@@ -12,6 +12,7 @@ abstract: |
   \section*{\centering \abstractname}
   This paper discusses the causal relationship between GDP growth and monetary expansion from the 16th to the 19th century, with the intent to identify the potential factors that contributed to economic growth during this period. Using a historical analysis approach, the paper examines multiple datasets including the nominal and real GDP of different European countries, the production of precious metals in the Americas, and the mint output of England that gave a glimpse to what potentially stimulates economic growth. The findings suggest that monetary injection played a significant role in increasing mint output and driving GDP growth during this period. Additionally, the study highlights the importance of monetary policies in promoting economic development. Overall, this paper provides insights into the factors that drove economic growth during a critical period in economic history.
 format: pdf
+toc: true
 bibliography: references.bib
 ---
 
