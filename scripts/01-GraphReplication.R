@@ -1,11 +1,11 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
+# Purpose: Downloads and saves the data from The Real Effects of Monetary Expansions: Evidence from a Large-scale Historical Experiment
+# Author: Rae Zhang / Jenny Shen / Sarah Zhang
 # Data: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Contact: junwei.zhang@mail.utoronto.ca 
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: Have access to the paper 
+# Any other information needed? N/A
 
 
 
