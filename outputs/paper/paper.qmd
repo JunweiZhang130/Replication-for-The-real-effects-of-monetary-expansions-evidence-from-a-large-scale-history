@@ -1,113 +1,229 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: Increase of GDP and Monetary Expansion
+subtitle: An Analysis of Potential Factors from 16th to 19th century
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
+  - Rae Zhang
+  - Jenny Shen
+  - Sarah Zhang
+thanks: "Code, data and reproduction package are available at: https://github.com/JunweiZhang130/Replication-for-The-real-effects-of-monetary-expansions-evidence-from-a-large-scale-history.git and https://www.socialsciencereproduction.org/reproductions/8d4a8d6c-9f9f-44dc-bd97-9c810ed677f6/index "
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper discusses the causal relationship between GDP growth and monetary expansion from the 16th to the 19th century, with the intent to identify the potential factors that contributed to economic growth during this period. Using a historical analysis approach, the paper examines multiple datasets including the nominal and real GDP of different European countries, the production of precious metals in the Americas, and the mint output of England that gave a glimpse to what potentially stimulates economic growth. The findings suggest that monetary injection played a significant role in increasing mint output and driving GDP growth during this period. Additionally, the study highlights the importance of monetary policies in promoting economic development. Overall, this paper provides insights into the factors that drove economic growth during a critical period in economic history. "
 format: pdf
-number-sections: true
+toc: FALSE
+output: bookdown::pdf-document2
 bibliography: references.bib
 ---
 
 ```{r}
+#| echo: false
 #| include: false
 #| warning: false
 #| message: false
 
-library(tidyverse)
-library(palmerpenguins)
+library("tidyverse")
+library("haven")
+library("ggplot2")
+
 ```
 
+\newpage
+# 1 Introduction
 
-# Introduction
+  During the early period, the discovery of massive deposits of precious metals in the Americas resulted in monetary expansions to Europe’s supply. The finding of vast quantities of gold and silver in the New World had a significant influence on the world economy's subsequent history. The increase in the supply has reshaped the imports of consumer goods across Europe, and one of the results is monetary expansions. The effects of monetary policy have had major consequences, including increased economic activity, higher investment rates, and enhanced innovation. This paper explores the causal relationship of monetary policy and production of metals, and its effect on the increase of GDP, using historical data of the six European countries (citation). Specifically, we will examine how the real GDP of European countries, Gold and Silver production, and Mint output has impacted monetary expansions. Some factors that we considered which influenced monetary expansions on a variety of outcomes, including economic activity, investment, and innovation.
 
-You can and should cross-reference sections and sub-sections. For instance, @sec-data and @sec-first-point. 
+  We replicate the paper by Palma [@PalmaRealEffect] with a focus on the following research questions:
+  
+  - What is the trend in nominal GDP and real GDP over the period of 1500 to 1800?
+  - How does gold and silver share in America contribute to the trend of monetary expansion?
+  - Why is mint output increasing from the period of 1500 to 1800 and how does it contribute to the monetary expansion? 
+
+  The paper makes a significant contribution to our understanding of the effects of monetary policy on the European economy, the importance of historical analysis for understanding economic issues, and the relevance of cross-country comparisons in economics. Specifically, it provides evidence on the effects of large-scale monetary expansions in the 18th century, which is a period where there was a widespread belief that money supply increases would not have real effects on the economy. By studying the historical analysis, we will have deeper insights into current economic issues. Our goal is to organize the connections between the trends of historical data  in the 18th century. Explore how monetary policy affects the real economy in Europe, especially England during the period. 
+
+  The analysis found that precious metals are one of the factors that contributed to monetary expansion in the 18th century. When precious metals, such as gold and silver were used as the basis for currency, it caused an increase in demand within the country, or within international trade, which led to monetary expansion. During the period of 1500 to 1800, production of precious metal increased which contributed to many of the European country’s GDP. In our reproduction of their paper, we build on their “monetary expansion” explanation by expanding on the relationship between Nominal GDP and Real GDP and the effect of precious metals in the period of 1500 to 1800. 
+
+  In this report, we will discuss the effects of monetary expansion on the European economy. The first section of the report will be covering the datasets we used for this analysis. The second section will be addressing our findings from analyzing these data. Section 3 of the report will expand on our findings and develop additional discussion on the ethics and biases of the datasets. Finally, the last section of the report will examine the weaknesses and potential of the overall paper.
 
 
+# 2 Data
 
-# Data {#sec-data}
+All figures in the paper are replicated from the original paper; The replication material consist of two datasets: "liquidity.dta" and "datadescriptive.dta". "liquidity.dta" is the main datafile which is used for the analysis and contains all variables used in the regression analysis. "datadescriptive.dta" contains some additional variables which is used for the descriptive figures. 
 
-Our data is of penguins (@fig-bills).
+The datasets for this report were obtained from the data section "The Real Effects of Monetary Expansion: Evidence from a Large-scale Historical Experiment" [@PalmaRealEffect], a paper from the Review of Economic Studies. The data used by the paper was compiled by various sources that spans a very long horizon (1531–1790), The most common primary data sources for these studies are surviving account books of the landed estates formerly belonging to local government and royal administration, historical hospitals, prisons, charities, orphanages, universities, and institutions of the church, particularly monasteries and convents. GDP and prices come from the following sources: England from Broadberry et al. [@Broadberry2015], Holland from van Zanden and van Leeuwen [@vanZanden2012], Spain from ¡lvarez-Nogal and Prados de la Escosura [@AlvarezNogal2013], Italy from Malanima [@Malanima2011], Portugal from Palma and Reis (2019) and Germany from Pfister [@Pfister2020]. When the original price level was in silver it was transformed into monetary units using the information given by Karaman et al. [@Karaman2020]. Englandís nominal mint output from Challis[@Challis1992] and Palma's "Reconstruction of money supply over the long run: the case of England" and "Money and modernization in early modern England"[@Palma2018b]. With regards to the innovation component of gold arrivals, it is built using Costa et al. [@Costa2013] and Morineau[@Morineau2009] as explained in the text. The data is mainly numeric, counting the number of the amount of monetary activities in European countries. 
+
+The analysis will be carried out using the statistical programming language R [@citeR], using the haven [@citehaven] and tidyverse [@citetidyverse] packages. All figures in the report are generated using ggplot2 [@citeggplot2]. 
+
 
 ```{r}
 #| label: fig-bills
-#| fig-cap: Bills of penguins
 #| echo: false
+#| warning: false
+#| message: false
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+# Loading in datasets and library
+liquidity <- read_dta(here::here("scripts/liquidity.dta"))
+datadescriptive <- read_dta(here::here("scripts/datadescriptive.dta"))
+
 ```
+\newpage
+# 3 Results
 
-Talk more about it.
-
-Also bills and their average (@fig-billssssss). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work.)
+## The Real and Nominal GDP over the Period of 1500 to 1800 
 
 ```{r}
-#| label: fig-billssssss
-#| fig-cap: More bills of penguins
+#| label: fig-nominalgdp
+#| fig-cap: shows the nominal GDP of six countries from 1500 to 1800. *Nominal gross domestic product (GDP) is GDP given in current prices, without adjustment for inflation [@oecd_nominal_gdp_forecast]
 #| echo: false
-#| fig-width: 8
-#| fig-height: 4
+#| warning: false
+#| message: false
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
+# Replication of Figure 4
+# Replication of Figure 4
+color = c("#7F3C8D", 
+           "#11A579", 
+           "#3969AC", 
+           "#F2B701", 
+           "#E73F74", 
+           "#80BA5A")
+
+NominalGDP <- liquidity |>
+  ggplot(aes(x = year, 
+             y = Nominal_GDPindex1700100, 
+             color = country)) +
+  geom_line(size = 0.8) +
+  scale_color_manual(values = color) +
+  scale_y_continuous(limits = c(0, 300), 
+                     expand = c(0, 0)) +
+  labs(x = "Year", 
+       y = "Nominal GDP, index(1700=100)", 
+       title = "Nominal GDP for Six Countries during 1500 to 1800") +
   theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+  facet_wrap(~ country, ncol = 2)
+
+NominalGDP
 ```
 
-Talk way more about it. 
-
-
-
-# Model
-
-$$
-Pr(\theta | y) = \frac{Pr(y | \theta) Pr(\theta)}{Pr(y)}
-$$ {#eq-bayes}
-
-@eq-bayes seems useful, eh?
-
-Here's a dumb example of how to use some references: In paper we run our analysis in `R` [@citeR]. We also use the `tidyverse` which was written by @thereferencecanbewhatever If we were interested in baseball data then @citeLahman could be useful. 
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
-
-# Results
-
-# Discussion
-
-## First discussion point {#sec-first-point}
-
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
-
+In [@fig-nominalgdp], The vertical axis shows the Nominal Gross Domestic Product (GDP) index (normalized to 1700=100), and the horizontal axis shows the year. Each graph represents one of the six countries, and the colours determine each country. The plot is intended to show the differences in the economic development of different countries over time.The impact of precious metals on GDP (Gross Domestic Product) can vary depending on several factors such as the type of metal, the production levels, and the overall demand for the metal. The data shows that there were significant differences in the level of economic development between these countries during this time period, with the United Kingdom and the Netherlands having the highest levels of nominal GDP, and Spain and Portugal having the lowest levels. 
 \newpage
 
-\appendix
+```{r}
+#| label: fig-realgdp
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: displays the Real GDP of six European countries over the period of 1500 - 1800, *Real gross domestic product (GDP) is GDP given in constant prices and refers to the volume level of GDP [@oecd_real_gdp_forecast].
 
-# Appendix {-}
+
+# Replication of Figure 6
+color = c("#7F3C8D", 
+           "#11A579", 
+           "#3969AC", 
+           "#F2B701", 
+           "#E73F74", 
+           "#80BA5A")
+
+RealGDP <- liquidity |>
+  ggplot(aes(x = year, 
+             y = realGDPindex1700100, 
+             color = country)) +
+  geom_line(size = 0.8) +
+  scale_color_manual(values = color) +
+  scale_y_continuous(limits = c(0, 300), 
+                     expand = c(0, 0)) +
+  
+  labs(x = "Year", 
+       y = "Real GDP, index(1700=100)", 
+       title = "Real GDP for Six Countries during 1500 to 1800") +
+  theme_minimal() +
+  facet_wrap(~ country, ncol = 2)
+
+RealGDP
+
+```
+
+[@fig-realgdp] has a similar plot with [@fig-nominalgdp], the vertical axis shows the Real GDP index (normalized to 1700=100), and the horizontal axis shows the year. the response of output to a monetary expansion in the six countries from 1500 to 1800. The results indicate that the response of output varied widely between countries, with some countries experiencing a large increase in output in response to monetary expansion (e.g., the Netherlands), while others experienced little to no response (e.g., Spain). Additionally, the response of output to monetary expansion changed over time, with some countries experiencing a greater response in the earlier period of the study (e.g., Germany) and others experiencing a greater response in the later period (e.g., the United Kingdom).
+
+Overall, these figures illustrate the heterogeneity of economic development across countries and the diversity of responses to monetary policy, highlighting the importance of country-specific factors in determining the impact of monetary policy.
 
 
-# Additional details
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: Total Goldshare through 1530 to 1790
+#| label: fig-goldshare
+
+# Replication of Figure 7
+# Set color palette
+mypal <- c("#1b9e77", "#d95f02")
+
+TotalGoldShare <- datadescriptive |>
+  ggplot(aes(x = year, y = goldshare, fill = "Total Gold Share")) +
+  geom_bar(stat = "identity", na.rm = TRUE) +
+  geom_line(aes(x = year, y = goldshare, color = "Total Gold Share"), size = 1.5) +
+  labs(x = "Year", 
+       y = "Total Gold Share", 
+       title = "Share of Gold in Total Production through 1530 to 1790") +
+  scale_x_continuous(limits = c(1530, 1790), breaks = seq(1530, 1790, by = 10)) +
+  scale_y_continuous(limits = c(0, 100)) +
+  scale_fill_manual(values = mypal, guide = "none") +
+  scale_color_manual(values = mypal, guide = "none") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+TotalGoldShare
+```
+\newpage
+
+As shown in the graph(@fig-goldshare), the mining of gold and silver culminated in the 1530s from the occurrence of Mexican and Peruvian acquisitions [@davenport_2012]. The Mexican and Peruvian conquests resulted in an outstanding increment in the production of precious metals under Spanish colonisation. However, the annual production of precious metals decreased significantly in the late sixteenth century all the way through the late seventeenth century due to factors such as shipwrecks, rivalries, and the lacking resources of gold [@woodward_bushnell]. It was not until the 1700s the share of gold and silver surges again with the new streams of Brazilian and Mexican production of precious metals [@GUERRA20041225].
+
+It is important to note that the early monetary system was a commodity money system and there were no central banks but only one form of monetary policy, which is the control of the rate at which private agents could transform precious metals into currency. Hence, the production of precious metals mattered for how much new coin was minted.
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: England Mint Output from 1531 to 1790
+#| label: fig-mintoutput
+
+# Replication of Figure 12
+
+EnglandMintOutput <- datadescriptive %>%
+  ggplot(aes(x = year, y = englandmintmillions)) +
+  geom_bar(stat = "identity", na.rm = TRUE) +
+  labs(x = "Year", 
+       y = "England Mint Output (in millions)", 
+       title = "England Mint Output from 1531 to 1790") +
+  scale_x_continuous(limits = c(1531, 1790))
+EnglandMintOutput
+```
+
+# 4 Disucussion
+
+## Cohort Effect in European Countries
+
+The paper examines the impact of monetary expansions on the GDP changes in six European countries from the 16th to 19th century. During 1800, with cheaper transportation and mass production, goods no longer had to be made near to where they were consumed, which encouraged monetary expansion.the paper provides strong evidence that monetary expansions can have significant real effects on economic activity. This is demonstrated through the analysis of the historical experiment where six European countries experienced large-scale monetary expansions in the 18th century.  The paper shows that monetary expansions were associated with an increase in output, which in turn led to an increase in nominal GDP in the 18th and 19th centuries. The link between monetary expansions, mint output, and GDP is intuitive. When the money supply increases, individuals and firms have more money to spend, which leads to an increase in demand for goods and services. This, in turn, stimulates production and leads to an increase in output. With a higher output, the economy as a whole is able to produce more, which leads to an increase in both nominal and real GDP. 
+
+## A Case of Monetary Expansion: England’s Mint Output
+[@fig-mintoutput] illustrates the English nominal mint output from 1531 - 1790 period. Mint output refers to the amount of new currency that is produced over the period of time, which can be measured using the quantity of the coins that are produced. The Mint output was a steady decrease in the issue of gold coins and sharper increase in the production of silver coins. This is primarily caused by the proportion of silver to gold coins. The mint output was relatively low in the fourteenth century, but as the picture indicates, it surged from the sixteenth century onward. During the 16th century, the world gold-silver ratio grew, as world stocks increased, the less precious metal continued to depreciate. 
+
+In the 18th century, England adopted the gold standard, which meant that the value of coins was tied to the value of gold. This led to an increase in the production of gold coins, which caused the output of the mint to fluctuate. This also explains the peaks during 1770-1780, as the mint output reached 5 million pounds. The mint output tripled in late 1700, which could be caused by several factors such as the growth of international trade. As England's economy grew and trade with other countries increased, there was a greater demand for currency to facilitate commerce [@Gould]. This supports the evidence that increase in American precious metals inevitably results in growth in European money supply, particularly for second-wave receivers like England, who obtained it mostly through trade with Spain and Portugal. 
+
+As seen in [@fig-nominalgdp] and [@fig-realgdp], the trend of mint output is linked to the trend of GDP, which can fluctuate and vary based on the economic activity of the period. While mint output of precious metals can be linked to GDP, it is worth noting that the output is not always increasing and can be volatile. This volatility is caused by fluctuations in the market, which are impacted by supply and demand within the country and in international trade. These fluctuations can lead to price increases or decreases and can be reflected in exports and imports of precious metals, which can, in turn, affect the profitability of mining companies and ultimately impact GDP.
+
+## How Does Mint Output and Monetary Expansion Contribute to Today’s Economy?
+
+Mint output impacts today’s economy in several ways including facilitating transactions, generating revenue, supporting financial stability, and promoting national identity. In daily life, increasing mint output makes it easier and more convenient for people to purchase goods and services, pay bills, and conduct financial transactions. While the process of producing new currencies and coins helps generate revenue for the government, which can then be used to fund public services and infrastructures. A reliable and consistent mint output could also make certain an adequate amount of currency in circulation, ensuring there will not be disruptions in the financial system. Furthermore, currencies and coins often feature national symbols and images that promote a country’s cultural identity and heritage, creating a positive and lasting effect on tourism and international trade. 
+
+On the other hand, the effects of monetary expansion on economic activities are more complex. Monetary expansion can affect the economy through changes in interest rates, money supply,  exchange rates, and GDP. The decrease in interest rates could stimulate economic growth by encouraging individuals and businesses to borrow more money in order to spend and make investments. However, it can also lead to inflation when the amount of mint output becomes greater than the supply of goods and services in the economy. Additionally, monetary expansion can depreciate the value of the currency since a lower interest rate often makes a country’s currency less attractive to investors from a foreign country. And from the findings of this paper, monetary injections are proven to be the cause of increase in both nominal and real GDP of different countries. Overall, monetary expansion can have positive effects such as stimulating the growth of the economy, but it can also instigate negative effects such as inflation if not managed properly.
+
+## Bias and Ethical Concerns
+
+The paper by Palma [@PalmaRealEffect] relies on a large dataset of economic indicators and variables, which is mostly made up of long-term historical data. The use of such data introduces several potential sources of bias that could impact the statistical analysis and interpretation of the results. One potential source of bias is selection bias. Firstly, the paper focuses on European countries and may not be generalizable to other regions. This could introduce sampling bias because the findings may not generalize to other contexts or time periods. Economic and institutional conditions in Europe during the historical period analyzed in the paper were unique and different from those in other regions and time periods. Therefore, it is possible that the results may not be applicable to other economies or time periods. 
+
+Furthermore, the use of historical data can introduce additional biases, such as measurement error, missing data, and differences in data quality across time and regions. This can potentially affect the accuracy and reliability of the results, as well as limit the generalizability of the findings. Additionally, the availability and quality of data may have been influenced by political and economic factors, which can further affect the validity and reliability of the results.
+
+# 5 Weakness
+In the reproduction process, we translate the original STATA language into R, meanwhile,  we updated the profile name to make it better organized in the folder. However, the paper still has many weaknesses. For example, the information Palma provided in the package was incomplete. Additionally, considering source was collected from local governments and account books, and the data was from an old range of period. Errors in the dataset can occur. Due to this, the conclusion that we draw from this graph are likely not accurate to reflect the overall trend of GDP. Our research question focused on the trend of GDP over the period of 1500 to 1800, and only focusing on the precious metal. Yet our conclusion was drawn from the six countries and does not reflect the world. 
 
 
 \newpage

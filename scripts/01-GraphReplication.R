@@ -23,8 +23,13 @@ write_dta(liquidity,"scripts/liquidity.dta")
 liquidity <- read_dta(here::here("scripts/liquidity.dta"))
 datadescriptive <- read_dta(here::here("scripts/datadescriptive.dta"))
 
-
 # Replication of Figure 4
+color = c("#7F3C8D", 
+           "#11A579", 
+           "#3969AC", 
+           "#F2B701", 
+           "#E73F74", 
+           "#80BA5A")
 
 NominalGDP <- liquidity |>
   ggplot(aes(x = year, 

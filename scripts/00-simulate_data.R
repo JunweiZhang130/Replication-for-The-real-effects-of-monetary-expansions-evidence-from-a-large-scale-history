@@ -1,11 +1,11 @@
 #### Preamble ####
-# Purpose: Simulates... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Data: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Simulates Increase of GDP and Monetary Expansion: An Analysis of Potential Factors from 16th to 19th century
+# Author: Rae Zhang / Jenny Shen / Sarah Zhang
+# Data: 22 February 2023
+# Contact: junwei.zhang@mail.utoronto.ca 
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: Have access to the paper 
+# Any other information needed? N?A
 
 #### Workspace setup ####
 library(tidyverse)
