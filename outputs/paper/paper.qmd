@@ -69,7 +69,7 @@ datadescriptive <- read_dta(here::here("scripts/datadescriptive.dta"))
 
 # 3 Results
 
-## The Real and Nominal GDP over the Period of 1500 to 1800
+## 3.1 The Real and Nominal GDP Trends
 
 ```{r}
 #| label: fig-nominalgdp
@@ -176,6 +176,7 @@ TotalGoldShare
 ```
 
 \newpage
+## 3.2 Share of Gold in Total Production
 
 As shown in the graph(@fig-goldshare), the mining of gold and silver culminated in the 1530s from the occurrence of Mexican and Peruvian acquisitions [@davenport_2012]. The Mexican and Peruvian conquests resulted in an outstanding increment in the production of precious metals under Spanish colonisation. However, the annual production of precious metals decreased significantly in the late sixteenth century all the way through the late seventeenth century due to factors such as shipwrecks, rivalries, and the lacking resources of gold [@woodward_bushnell]. It was not until the 1700s the share of gold and silver surges again with the new streams of Brazilian and Mexican production of precious metals [@GUERRA20041225].
 
