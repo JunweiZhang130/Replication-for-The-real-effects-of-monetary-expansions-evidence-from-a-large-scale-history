@@ -4,7 +4,7 @@
 # Data: 22 February 2023
 # Contact: junwei.zhang@mail.utoronto.ca 
 # License: MIT
-# Pre-requisites: Have access to the paper 
+# Pre-requisites: Have access to the paper and reproduction package
 # Any other information needed? N?A
 
 #### Workspace setup ####
