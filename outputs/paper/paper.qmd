@@ -5,12 +5,13 @@ author:
   - Rae Zhang
   - Jenny Shen
   - Sarah Zhang
-thanks: "Code, data and reproduction package are available at: https://github.com/JunweiZhang130/Replication-for-The-real-effects-of-monetary-expansions-evidence-from-a-large-scale-history.git and https://www.socialsciencereproduction.org/reproductions/8d4a8d6c-9f9f-44dc-bd97-9c810ed677f6/index "
+thanks: "Code and data available at: https://github.com/JunweiZhang130/Replication-for-The-real-effects-of-monetary-expansions-evidence-from-a-large-scale-history.git ; A replication of various Aspects in this paper are available at:  https://doi.org/10.48152/ssrp-6nfn-1g27"
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
-abstract: "This paper discusses the causal relationship between GDP growth and monetary expansion from the 16th to the 19th century, with the intent to identify the potential factors that contributed to economic growth during this period. Using a historical analysis approach, the paper examines multiple datasets including the nominal and real GDP of different European countries, the production of precious metals in the Americas, and the mint output of England that gave a glimpse to what potentially stimulates economic growth. The findings suggest that monetary injection played a significant role in increasing mint output and driving GDP growth during this period. Additionally, the study highlights the importance of monetary policies in promoting economic development. Overall, this paper provides insights into the factors that drove economic growth during a critical period in economic history. "
+abstract: |
+  \section*{\centering \abstractname}
+  This paper discusses the causal relationship between GDP growth and monetary expansion from the 16th to the 19th century, with the intent to identify the potential factors that contributed to economic growth during this period. Using a historical analysis approach, the paper examines multiple datasets including the nominal and real GDP of different European countries, the production of precious metals in the Americas, and the mint output of England that gave a glimpse to what potentially stimulates economic growth. The findings suggest that monetary injection played a significant role in increasing mint output and driving GDP growth during this period. Additionally, the study highlights the importance of monetary policies in promoting economic development. Overall, this paper provides insights into the factors that drove economic growth during a critical period in economic history.
 format: pdf
-output: bookdown::pdf-document2
 bibliography: references.bib
 ---
 
