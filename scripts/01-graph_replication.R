@@ -18,10 +18,37 @@ library("ggplot2")
 
 datadescriptive <- read_dta("inputs/data/datadescriptive.dta")
 liquidity <- read_dta("inputs/data/liquidity.dta")
+
+# Test datasets
+
+# Test numbers of rows in datadescriptive.dta
+nrow(datadescriptive) == 324
+
+# Test numbers of countires in liquidity.dta
+liquidity$country |>
+  unique() == c(
+    "England/GB",
+    "Italy",
+    "Holland",
+    "Portugal",
+    "Spain",
+    "Germany"
+  )
+
+# Test min and max years in liquidity.dta
+liquidity$year |> 
+  min() == 1531
+
+liquidity$year |> 
+  max() == 1790
+
+# Save datasets
+
 write_dta(datadescriptive,"scripts/datadescriptive.dta")
 write_dta(liquidity,"scripts/liquidity.dta")
 liquidity <- read_dta(here::here("scripts/liquidity.dta"))
 datadescriptive <- read_dta(here::here("scripts/datadescriptive.dta"))
+
 
 # Replication of Figure 4
 color = c("#7F3C8D", 
