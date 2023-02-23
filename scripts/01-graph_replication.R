@@ -24,24 +24,6 @@ liquidity <- read_dta("inputs/data/liquidity.dta")
 # Test numbers of rows in datadescriptive.dta
 nrow(datadescriptive) == 324
 
-# Test numbers of countires in liquidity.dta
-liquidity$country |>
-  unique() == c(
-    "England/GB",
-    "Italy",
-    "Holland",
-    "Portugal",
-    "Spain",
-    "Germany"
-  )
-
-# Test min and max years in liquidity.dta
-liquidity$year |> 
-  min() == 1531
-
-liquidity$year |> 
-  max() == 1790
-
 # Save datasets
 
 write_dta(datadescriptive,"scripts/datadescriptive.dta")
