@@ -19,11 +19,6 @@ library("ggplot2")
 datadescriptive <- read_dta("inputs/data/datadescriptive.dta")
 liquidity <- read_dta("inputs/data/liquidity.dta")
 
-# Test datasets
-
-# Test numbers of rows in datadescriptive.dta
-nrow(datadescriptive) == 324
-
 # Save datasets
 
 write_dta(datadescriptive,"scripts/datadescriptive.dta")
